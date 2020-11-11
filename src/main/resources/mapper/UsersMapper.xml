@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.UsersDao">
+
+    <resultMap id="resultMap" type="users">
+        <id property="uId" column="u_id"></id>
+        <result property="uName" column="u_name"></result>
+        <result property="uPassword" column="u_password"></result>
+        <result property="uSex" column="u_sex"></result>
+    </resultMap>
+
+    <select id="selectAll" resultMap="resultMap">
+        select * from users
+    </select>
+
+    <select id="selectById" resultMap="resultMap">
+        select * from users where u_id=#{id}
+    </select>
+
+    <select id="selectByName" resultMap="resultMap">
+        select * from users where u_name like concat('%',#{uname},'%')
+    </select>
+
+    <insert id="addByUser"  keyProperty="uId" useGeneratedKeys="true">
+        insert into users(u_id,u_name,u_password,u_sex) values(null,#{uName},#{uPassword},#{uSex})
+    </insert>
+
+</mapper>
